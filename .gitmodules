@@ -1,0 +1,15 @@
+[submodule "engine-api"]
+	path = engine-api
+	url = https://github.com/gigamono/engine-api
+[submodule "engine-backend"]
+	path = engine-backend
+	url = https://github.com/gigamono/engine-backend
+[submodule "engine-scheduler"]
+	path = engine-scheduler
+	url = https://github.com/gigamono/engine-scheduler
+[submodule "utilities"]
+	path = utilities
+	url = https://github.com/gigamono/utilities
+[submodule "secure-runtime"]
+	path = secure-runtime
+	url = https://github.com/gigamono/secure-runtime
