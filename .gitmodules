@@ -13,3 +13,6 @@
 [submodule "secure-runtime"]
 	path = secure-runtime
 	url = https://github.com/gigamono/secure-runtime
+[submodule "web-ui"]
+	path = web-ui
+	url = https://github.com/gigamono/web-ui
