@@ -16,3 +16,6 @@
 [submodule "web-ui"]
 	path = web-ui
 	url = https://github.com/gigamono/web-ui
+[submodule "deno"]
+	path = deno
+	url = https://github.com/gigamono/deno

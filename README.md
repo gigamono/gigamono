@@ -21,5 +21,5 @@
 - It is easy.
 
     ```bash
-    docker run --rm -d -p 5050:5050 --name gigamono gigamono:latest
+    docker-compose --env-file ./sample.env  -f docker/compose/compose.yaml up
     ```

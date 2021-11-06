@@ -1,0 +1,38 @@
+# TODO(appcypher): Use volumes properly
+version: "3.9"
+services:
+  nats:
+    restart: always
+    image: nats
+    expose:
+      - "4222"
+    ports:
+      - "8222:8222"
+    hostname: nats
+
+  engine-api:
+    restart: always
+    environment:
+      - GIGAMONO_CONFIG_PATH
+    build:
+      context: ../../
+      dockerfile: docker/engine-api/Dockerfile
+    ports:
+      - "5050:5050"
+    depends_on:
+      - nats
+
+  engine-backend:
+    restart: always
+    environment:
+      - GIGAMONO_CONFIG_PATH
+    build:
+      context: ../../
+      dockerfile: docker/engine-backend/Dockerfile
+    volumes:
+      - engine-backend-vol:/app/engine-backend
+    depends_on:
+      - nats
+
+volumes:
+  engine-backend-vol:
