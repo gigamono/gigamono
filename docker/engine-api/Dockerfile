@@ -8,7 +8,6 @@ WORKDIR /app
 COPY ./deno ./deno
 COPY ./utilities ./utilities
 COPY ./engine-api ./engine-api
-COPY sample.gigamono.yaml ./engine-api
 
 # Enter `engine-api`.
 WORKDIR /app/engine-api

@@ -9,7 +9,6 @@ COPY ./deno ./deno
 COPY ./utilities ./utilities
 COPY ./secure-runtime ./secure-runtime
 COPY ./engine-backend ./engine-backend
-COPY sample.gigamono.yaml ./engine-backend
 
 # Enter `engine-backend`.
 WORKDIR /app/engine-backend
