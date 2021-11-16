@@ -18,8 +18,14 @@
 
 ### Getting Started <a name="getting-started" />
 
-- It is easy.
+- Clone repository with recursive flag to grab submodules
+
+    ```
+    git clone https://github.com/gigamono/gigamono --recursive
+    ```
+
+- Start docker compose
 
     ```bash
-    docker-compose --env-file ./sample.env  -f docker/compose/compose.yaml up
+    docker-compose --env-file ./sample.env -f docker/compose/compose.yaml up
     ```
