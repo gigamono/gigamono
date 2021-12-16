@@ -1,18 +1,18 @@
-[submodule "engine-api"]
-	path = engine-api
-	url = https://github.com/gigamono/engine-api
-[submodule "engine-backend"]
-	path = engine-backend
-	url = https://github.com/gigamono/engine-backend
-[submodule "engine-scheduler"]
-	path = engine-scheduler
-	url = https://github.com/gigamono/engine-scheduler
 [submodule "utilities"]
 	path = utilities
-	url = https://github.com/gigamono/utilities
-[submodule "secure-runtime"]
-	path = secure-runtime
-	url = https://github.com/gigamono/secure-runtime
-[submodule "web-ui"]
-	path = web-ui
-	url = https://github.com/gigamono/web-ui
+	url = https://www.github.com/gigamono/utilities
+[submodule "engine_proxy"]
+	path = engine_proxy
+	url = https://www.github.com/gigamono/engine_proxy
+[submodule "engine_workspace"]
+	path = engine_workspace
+	url = https://www.github.com/gigamono/engine_workspace
+[submodule "engine_backend"]
+	path = engine_backend
+	url = https://www.github.com/gigamono/engine_backend
+[submodule "tera"]
+	path = tera
+	url = https://www.github.com/gigamono/tera
+[submodule "web_ui"]
+	path = web_ui
+	url = https://www.github.com/gigamono/web_ui
