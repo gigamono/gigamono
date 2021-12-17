@@ -16,3 +16,6 @@
 [submodule "web_ui"]
 	path = web_ui
 	url = https://www.github.com/gigamono/web_ui
+[submodule "sample"]
+	path = sample
+	url = https://www.github.com/gigamono/sample

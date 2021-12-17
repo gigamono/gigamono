@@ -15,6 +15,7 @@ Workspaces are great for isolation but they are not enough to deal with privileg
 ### Content
 
 1. [Getting Started](#getting-started)
+2. [Headless Gigamono](#headless-gigamono)
 
 ##
 
@@ -22,12 +23,16 @@ Workspaces are great for isolation but they are not enough to deal with privileg
 
 - Clone repository with recursive flag to grab submodules
 
-    ```
-    git clone https://github.com/gigamono/gigamono --recursive
-    ```
+  ```
+  git clone https://github.com/gigamono/gigamono --recursive
+  ```
 
 - Start docker compose
 
-    ```bash
-    docker-compose --env-file ./sample.env -f docker/compose/compose.yaml up
-    ```
+  ```bash
+  docker-compose --env-file ./sample.env -f docker/compose/compose.yaml up
+  ```
+
+##
+
+### Headless Gigamono <a name="headless-gigamono" />

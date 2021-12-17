@@ -5,13 +5,14 @@ FROM rust:latest
 WORKDIR /app
 
 # Copy files over to working dir.
-COPY ./deno ./deno
 COPY ./utilities ./utilities
-COPY ./secure-runtime ./secure-runtime
-COPY ./engine-backend ./engine-backend
+COPY ./engine_proxy ./engine_proxy
 
-# Enter `engine-backend`.
-WORKDIR /app/engine-backend
+# Enter `engine_proxy`.
+WORKDIR /app/engine_proxy
+
+# Copy config file.
+COPY ./sample.gigamono.yaml ./
 
 # Build project.
 RUN cargo install --path .

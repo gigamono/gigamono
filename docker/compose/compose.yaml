@@ -6,33 +6,54 @@ services:
     image: nats
     expose:
       - "4222"
-    ports:
-      - "8222:8222"
     hostname: nats
+    networks:
+      - nats
 
-  engine-api:
-    restart: always
+  engine_proxy:
     environment:
       - GIGAMONO_CONFIG_PATH
+      - RUST_LOG
     build:
       context: ../../
-      dockerfile: docker/engine-api/Dockerfile
+      dockerfile: docker/engine_proxy/Dockerfile
     ports:
       - "5050:5050"
     depends_on:
       - nats
-
-  engine-backend:
-    restart: always
-    environment:
-      - GIGAMONO_CONFIG_PATH
-    build:
-      context: ../../
-      dockerfile: docker/engine-backend/Dockerfile
-    volumes:
-      - engine-backend-vol:/app/engine-backend
-    depends_on:
+    networks:
       - nats
 
-volumes:
-  engine-backend-vol:
+  engine_workspace:
+    environment:
+      - GIGAMONO_CONFIG_PATH
+      - RUST_LOG
+    build:
+      context: ../../
+      dockerfile: docker/engine_workspace/Dockerfile
+    expose:
+      - "5051"
+    depends_on:
+      - nats
+    networks:
+      - nats
+
+  engine_backend:
+    environment:
+      - GIGAMONO_CONFIG_PATH
+      - RUST_LOG
+    build:
+      context: ../../
+      dockerfile: docker/engine_backend/Dockerfile
+    expose:
+      - "5052"
+    volumes:
+      - ../../sample:/app/sample
+    depends_on:
+      - nats
+    networks:
+      - nats
+
+networks:
+  nats:
+    name: nats
