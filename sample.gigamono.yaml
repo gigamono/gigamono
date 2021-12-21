@@ -24,7 +24,7 @@ engines:
     root_path: ../
     subscriptions:
       workspaces:
-        run_surl: ["*"]
+        run_api: ["*"]
 
   db:
     db_url: postgresql://localhost:5432/dbserver

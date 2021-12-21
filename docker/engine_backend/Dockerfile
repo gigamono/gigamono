@@ -19,4 +19,4 @@ COPY ./sample.gigamono.yaml ./
 RUN cargo install --path .
 
 # Run binary
-ENTRYPOINT [ "./target/release/server" ]
+ENTRYPOINT [ "RUST_LOG=debug target/release/backend_server" ]
