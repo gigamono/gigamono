@@ -12,6 +12,8 @@ Workspaces are great for isolation but they are not enough to deal with privileg
 
 ##
 
+:warning: Not ready for production use :warning:
+
 ### Content
 
 1. [Getting Started](#getting-started)
