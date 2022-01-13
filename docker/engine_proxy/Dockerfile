@@ -1,21 +1,43 @@
-# Start from a slim Rust image.
-FROM rust:latest
+######################################
+## Builder
+######################################
+
+# Start from a Rust image.
+FROM rust:latest as builder
 
 # Enter working directory.
-WORKDIR /app
+WORKDIR /apps
 
 # Copy files over to working dir.
 COPY ./utilities ./utilities
 COPY ./engine_proxy ./engine_proxy
 
 # Enter `engine_proxy`.
-WORKDIR /app/engine_proxy
+WORKDIR /apps/engine_proxy
 
-# Copy config file.
-COPY ./sample.gigamono.yaml ./
+ENV RUSTFLAGS="-C target-feature=+crt-static"
 
 # Build project.
-RUN cargo install --path .
+RUN cargo build --target x86_64-unknown-linux-gnu --release
+
+# Strip symbols.
+RUN strip ./target/x86_64-unknown-linux-gnu/release/proxy_server
+
+######################################
+## Final Image
+######################################
+
+# Start with base alpine.
+FROM alpine:latest
+
+# Enter working directory.
+WORKDIR /apps
+
+# Copy just the app executable into workdir.
+COPY --from=builder \
+    /apps/engine_proxy/target/x86_64-unknown-linux-gnu/release/proxy_server \
+    ./
 
 # Run binary
-ENTRYPOINT [ "RUST_LOG=debug target/release/proxy_server" ]
+CMD [ "./proxy_server" ]
+

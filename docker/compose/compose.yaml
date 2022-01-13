@@ -1,16 +1,22 @@
-# TODO(appcypher): Use volumes properly
 version: "3.9"
 services:
   nats:
     restart: always
+    container_name: nats
     image: nats
+    hostname: nats
     expose:
       - "4222"
-    hostname: nats
+    ports:
+      - "4222:4222"
     networks:
       - nats
 
   engine_proxy:
+    container_name: engine_proxy
+    image: engine_proxy
+    restart: unless-stopped
+    hostname: engine_proxy
     environment:
       - GIGAMONO_CONFIG_PATH
       - RUST_LOG
@@ -19,40 +25,56 @@ services:
       dockerfile: docker/engine_proxy/Dockerfile
     ports:
       - "5050:5050"
-    depends_on:
-      - nats
-    networks:
-      - nats
-
-  engine_workspace:
-    environment:
-      - GIGAMONO_CONFIG_PATH
-      - RUST_LOG
-    build:
-      context: ../../
-      dockerfile: docker/engine_workspace/Dockerfile
-    expose:
-      - "5051"
-    depends_on:
-      - nats
-    networks:
-      - nats
-
-  engine_backend:
-    environment:
-      - GIGAMONO_CONFIG_PATH
-      - RUST_LOG
-    build:
-      context: ../../
-      dockerfile: docker/engine_backend/Dockerfile
-    expose:
-      - "5052"
     volumes:
-      - ../../sample:/app/sample
-    depends_on:
+      - type: bind
+        source: ../../
+        target: /mount
+    links:
       - nats
     networks:
       - nats
+
+  # engine_workspace:
+  #   container_name: engine_workspace
+  #   image: engine_workspace
+  #   restart: unless-stopped
+  #   environment:
+  #     - GIGAMONO_CONFIG_PATH
+  #     - RUST_LOG
+  #   build:
+  #     context: ../../
+  #     dockerfile: docker/engine_workspace/Dockerfile
+  #   expose:
+  #     - "5051"
+  #   volumes:
+  #     - type: bind
+  #       source: ../../
+  #       target: /mount
+  #   links:
+  #     - nats
+  #   networks:
+  #     - nats
+
+  # engine_backend:
+  #   container_name: engine_backend
+  #   image: engine_backend
+  #   restart: unless-stopped
+  #   environment:
+  #     - GIGAMONO_CONFIG_PATH
+  #     - RUST_LOG
+  #   build:
+  #     context: ../../
+  #     dockerfile: docker/engine_backend/Dockerfile
+  #   expose:
+  #     - "5052"
+  #   volumes:
+  #     - type: bind
+  #       source: ../../
+  #       target: /mount
+  #   links:
+  #     - nats
+  #   networks:
+  #     - nats
 
 networks:
   nats:

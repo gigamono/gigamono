@@ -1,40 +1,22 @@
 meta:
-  kind: Gigamono
+  kind: gigamono
   version: "1"
 
 broker:
-  url: nats://nats:4222
-  subscriptions:
-    workspaces:
-      version: 1
-    logs:
-      version: 1
+  socket_address: nats:4222
 
 engines:
   proxy:
-    socket_address: 0.0.0.0:5050
-    workspaces_db_url: postgresql://localhost:5432/apidb
+    socket_address: engine_proxy:5050
 
   workspace:
     socket_address: engine_workspace:5051
-    workspaces_db_url: postgresql://localhost:5432/apidb
 
   backend:
     socket_address: engine_backend:5052
-    root_path: ../
-    subscriptions:
-      workspaces:
-        run_api: ["*"]
-
-  db:
-    db_url: postgresql://localhost:5432/dbserver
-    subscriptions:
-      workspaces:
-        query: ["*"]
+    root_path: /mount/sample/
+    runtime:
+      enable_snapshot: false
 
 web_ui:
-  dir: ../web_ui/public
-
-logs:
-  file: server.log
-  is_published: false
+  dir: /mount/web_ui/build

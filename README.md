@@ -12,7 +12,9 @@ Workspaces are great for isolation but they are not enough to deal with privileg
 
 ##
 
-:warning: Not ready for production use :warning:
+<div align="center">
+  :warning: Not ready for production use :warning:
+</div>
 
 ### Content
 

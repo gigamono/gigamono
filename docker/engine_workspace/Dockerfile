@@ -1,40 +1,43 @@
-# ======= BUILDING WEB APP ======= #
-FROM node:latest as web_builder
+######################################
+## Builder
+######################################
+
+# Start from a Rust image.
+FROM rust:latest as builder
 
 # Enter working directory.
-WORKDIR /app
-
-# Copy files over to working dir.
-COPY ./web_ui ./web_ui
-
-# Enter `web_ui`.
-WORKDIR /app/web_ui
-
-# Install dependencies.
-RUN npm install
-
-# Build app
-RUN npm run build
-
-# ======= RUNNING RUST APP ======= #
-FROM rust:latest
-
-# Enter working directory.
-WORKDIR /app
+WORKDIR /apps
 
 # Copy files over to working dir.
 COPY ./utilities ./utilities
 COPY ./engine_workspace ./engine_workspace
-COPY --from=web_builder /app/web_ui ./web_ui
 
 # Enter `engine_workspace`.
-WORKDIR /app/engine_workspace
+WORKDIR /apps/engine_workspace
 
-# Copy config file.
-COPY ./sample.gigamono.yaml ./
+ENV RUSTFLAGS="-C target-feature=+crt-static"
 
 # Build project.
-RUN cargo install --path .
+RUN cargo build --target x86_64-unknown-linux-gnu --release
+
+# Strip symbols.
+RUN strip ./target/x86_64-unknown-linux-gnu/release/workspace_server
+
+######################################
+## Final Image
+######################################
+
+# Start with base alpine.
+FROM alpine:latest
+
+# Enter working directory.
+WORKDIR /apps
+
+# Copy just the app executable into workdir.
+COPY --from=builder \
+    /apps/engine_workspace/target/x86_64-unknown-linux-gnu/release/workspace_server \
+    ./
 
 # Run binary
-ENTRYPOINT [ "RUST_LOG=debug target/release/workspace_server" ]
+CMD [ "./workspace_server" ]
+
