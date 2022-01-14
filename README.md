@@ -27,14 +27,20 @@ Workspaces are great for isolation but they are not enough to deal with privileg
 
 - Clone repository with recursive flag to grab submodules
 
-  ```
+  ```bash
   git clone https://github.com/gigamono/gigamono --recursive
   ```
 
 - Start docker compose
 
   ```bash
-  docker-compose --env-file ./sample.env -f docker/compose/compose.yaml up
+  docker-compose --env-file ./sample.env -f docker/compose/compose.dev.yaml up
+  ```
+
+- Test the services.
+
+  ```bash
+  curl "localhost:5050/api/v1/system/apps"
   ```
 
 ##

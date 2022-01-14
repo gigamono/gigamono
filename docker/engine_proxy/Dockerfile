@@ -15,8 +15,6 @@ COPY ./engine_proxy ./engine_proxy
 # Enter `engine_proxy`.
 WORKDIR /apps/engine_proxy
 
-ENV RUSTFLAGS="-C target-feature=+crt-static"
-
 # Build project.
 RUN cargo build --target x86_64-unknown-linux-gnu --release
 
@@ -27,8 +25,8 @@ RUN strip ./target/x86_64-unknown-linux-gnu/release/proxy_server
 ## Final Image
 ######################################
 
-# Start with base alpine.
-FROM alpine:latest
+# Start with base debian.
+FROM debian:buster-slim
 
 # Enter working directory.
 WORKDIR /apps
