@@ -31,16 +31,34 @@ Workspaces are great for isolation but they are not enough to deal with privileg
   git clone https://github.com/gigamono/gigamono --recursive
   ```
 
-- Start docker compose
+  ```bash
+  cd gigamono
+  ```
 
   ```bash
   docker-compose --env-file ./sample.env -f docker/compose/compose.dev.yaml up
   ```
 
-- Test the services.
+- Test the apis.
 
   ```bash
   curl "localhost:5050/api/v1/system/apps"
+  ```
+
+- Setting up the UI
+
+  ```bash
+  cd web_ui
+  ```
+
+  ```bash
+  npm install && npm run build
+  ```
+
+- Visit the page
+
+  ```bash
+  open http://127.0.0.1:5050/dashboard
   ```
 
 ##
