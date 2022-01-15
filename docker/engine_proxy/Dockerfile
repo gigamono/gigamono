@@ -29,7 +29,7 @@ RUN strip ./target/x86_64-unknown-linux-gnu/release/proxy_server
 FROM debian:buster-slim
 
 # Enter working directory.
-WORKDIR /apps
+WORKDIR /apps/engine_proxy
 
 # Copy just the app executable into workdir.
 COPY --from=builder \

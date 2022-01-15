@@ -11,13 +11,10 @@ services:
 
   engine_proxy:
     container_name: engine_proxy
-    image: engine_proxy
+    image: gigamono/engine_proxy:latest
     environment:
       - GIGAMONO_CONFIG_PATH
       - RUST_LOG
-    build:
-      context: ../../
-      dockerfile: docker/engine_proxy/Dockerfile
     ports:
       - "5050:5050"
     volumes:
@@ -31,13 +28,10 @@ services:
 
   engine_workspace:
     container_name: engine_workspace
-    image: engine_workspace
+    image: gigamono/engine_workspace:latest
     environment:
       - GIGAMONO_CONFIG_PATH
       - RUST_LOG
-    build:
-      context: ../../
-      dockerfile: docker/engine_workspace/Dockerfile
     expose:
       - "5051"
     volumes:
@@ -51,13 +45,10 @@ services:
 
   engine_backend:
     container_name: engine_backend
-    image: engine_backend
+    image: gigamono/engine_backend:latest
     environment:
       - GIGAMONO_CONFIG_PATH
       - RUST_LOG
-    build:
-      context: ../../
-      dockerfile: docker/engine_backend/Dockerfile
     expose:
       - "5052"
     volumes:

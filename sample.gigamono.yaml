@@ -19,4 +19,4 @@ engines:
       enable_snapshot: false
 
 web_ui:
-  dir: /mount/web_ui/build
+  dir: /apps/web_ui/build

@@ -25,10 +25,10 @@ Workspaces are great for isolation but they are not enough to deal with privileg
 
 ### Getting Started <a name="getting-started" />
 
-- Clone repository with recursive flag to grab submodules
+- Clone repository and run docker-compose
 
   ```bash
-  git clone https://github.com/gigamono/gigamono --recursive
+  git clone https://github.com/gigamono/gigamono
   ```
 
   ```bash
@@ -36,26 +36,16 @@ Workspaces are great for isolation but they are not enough to deal with privileg
   ```
 
   ```bash
-  docker-compose --env-file ./sample.env -f docker/compose/compose.dev.yaml up
+  docker-compose --env-file ./sample.env -f docker/compose/compose.repo.yaml up
   ```
 
-- Test the apis.
+- Test apis.
 
   ```bash
-  curl "localhost:5050/api/v1/system/apps"
+  curl "localhost:5050/api/v1/system/apps?enabled=true" | json_pp
   ```
 
-- Setting up the UI
-
-  ```bash
-  cd web_ui
-  ```
-
-  ```bash
-  npm install && npm run build
-  ```
-
-- Visit the page
+- Visit page.
 
   ```bash
   open http://127.0.0.1:5050/dashboard
