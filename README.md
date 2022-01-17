@@ -6,7 +6,7 @@
 
 <h1 align="center">Gigamono</h1>
 
-`Gigamono` is a secure multi-tenant serverless framework for building workspaces that can host any number of web apps. Although Gigamono comes bundled with some development and productivity apps, the framework itself is unopinionated on what kind of functionality you want out of your workspace.
+`Gigamono` is a secure serverless platform for building workspaces that can host any number of web apps. Although Gigamono comes bundled with some development and productivity apps, the framework itself is unopinionated on what kind of functionality you want out of your workspace.
 
 Workspaces are great for isolation but they are not enough to deal with privilege escalation issues that come from running third-party modules. The capability-based security system built into the framework means that each running module would require the permission of an admin to access sensitive system resources, and the nice thing is that this applies to frontend apps and extensions running in your UI as well.
 
